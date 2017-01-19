@@ -53,7 +53,7 @@ rm -rf /var/cache/debconf/*-old && \
 rm -rf /var/lib/apt/lists/* && \
 rm -rf /usr/share/doc/* && \
 rm -rf /tmp/* /var/tmp/* && \
-rm -rf /var/lib/apt/lists/* /var/cache/*
+rm -rf /var/lib/apt/lists/*
 
 
 #########################################
