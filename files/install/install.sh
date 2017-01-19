@@ -23,8 +23,12 @@ rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 #########################################
 
 # Repositories
-echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial main universe restricted' > /etc/apt/sources.list
-echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates main universe restricted' >> /etc/apt/sources.list
+# echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial main universe restricted' > /etc/apt/sources.list
+# echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates main universe restricted' >> /etc/apt/sources.list
+
+echo 'deb http://mirror.math.princeton.edu/pub/ubuntu/ xenial main universe restricted' > /etc/apt/sources.list
+echo 'deb http://mirror.math.princeton.edu/pub/ubuntu/ xenial-updates main universe restricted' >> /etc/apt/sources.list
+
 
 # Install Dependencies
 apt-get update -qq
