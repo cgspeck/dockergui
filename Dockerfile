@@ -40,21 +40,6 @@ RUN chmod +x /tmp/install/install.sh && /tmp/install/install.sh
 # Copy X app start script to right location
 COPY startapp.sh /startapp.sh
 
-#########################################
-##                 CLEANUP             ##
-#########################################
-RUN \
-# Clean APT install files
-apt-get clean -y && \
-apt-get autoclean -y && \
-apt-get autoremove -y && \
-rm -rf /usr/share/locale/* && \
-rm -rf /var/cache/debconf/*-old && \
-rm -rf /var/lib/apt/lists/* && \
-rm -rf /usr/share/doc/* && \
-rm -rf /tmp/* /var/tmp/* && \
-rm -rf /var/lib/apt/lists/*
-
 
 #########################################
 ##         EXPORTS AND VOLUMES         ##
