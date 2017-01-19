@@ -27,7 +27,7 @@ CMD ["/sbin/my_init"]
 ##         RUN INSTALL SCRIPT          ##
 #########################################
 COPY ./files/ /tmp/
-RUN chmod +x /tmp/install/install.sh && /tmp/install/install.sh && rm -r /tmp/install
+RUN chmod +x /tmp/install/install.sh && /tmp/install/install.sh
 
 
 RUN \
@@ -52,6 +52,22 @@ lxterminal
 
 # Copy X app start script to right location
 COPY startapp.sh /startapp.sh
+
+#########################################
+##                 CLEANUP             ##
+#########################################
+
+# Clean APT install files
+apt-get clean -y
+apt-get autoclean -y
+apt-get autoremove -y
+rm -rf /usr/share/locale/*
+rm -rf /var/cache/debconf/*-old
+rm -rf /var/lib/apt/lists/*
+rm -rf /usr/share/doc/*
+rm -rf /tmp/* /var/tmp/*
+rm -rf /var/lib/apt/lists/* /var/cache/* /var/tmp/*
+
 
 #########################################
 ##         EXPORTS AND VOLUMES         ##
