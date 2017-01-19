@@ -6,6 +6,8 @@
 
 # Configure user nobody to match unRAID's settings
 export DEBIAN_FRONTEND="noninteractive"
+export DEBCONF_NONINTERACTIVE_SEEN=true
+
 usermod -u 99 nobody
 usermod -g 100 nobody
 usermod -m -d /nobody nobody
@@ -60,7 +62,9 @@ apt-get install -qy --force-yes --no-install-recommends libossp-uuid-dev \
                                                         libpng12-dev \
                                                         libfreerdp-dev \
                                                         libcairo2-dev \
-                                                        tomcat7
+                                                        tomcat7 \
+							lxterminal \
+							nano
 
 
 #########################################
