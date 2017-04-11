@@ -22,12 +22,12 @@ rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 ##    REPOSITORIES AND DEPENDENCIES    ##
 #########################################
 
-# Repositories
-# echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial main universe restricted' > /etc/apt/sources.list
-# echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates main universe restricted' >> /etc/apt/sources.list
+# Repositorieshttp://mirror.aarnet.edu.au/pub/ubuntu/archive/
+echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial main universe restricted' > /etc/apt/sources.list
+echo 'deb mirror://mirrors.ubuntu.com/mirrors.txt xenial-updates main universe restricted' >> /etc/apt/sources.list
 
-echo 'deb http://mirror.math.princeton.edu/pub/ubuntu/ xenial main universe restricted' > /etc/apt/sources.list
-echo 'deb http://mirror.math.princeton.edu/pub/ubuntu/ xenial-updates main universe restricted' >> /etc/apt/sources.list
+# echo 'deb http://mirror.math.princeton.edu/pub/ubuntu/ xenial main universe restricted' > /etc/apt/sources.list
+# echo 'deb http://mirror.math.princeton.edu/pub/ubuntu/ xenial-updates main universe restricted' >> /etc/apt/sources.list
 
 
 # Install Dependencies
@@ -91,7 +91,7 @@ groupmod -g $GROUPID users
 usermod -u $USERID nobody
 usermod -g $GROUPID nobody
 usermod -d /nobody nobody
-chown -R nobody:users /nobody/ 
+chown -R nobody:users /nobody/
 EOT
 
 # app config
@@ -100,7 +100,7 @@ cat <<'EOT' > /etc/my_init.d/02_app_config.sh
 APPNAME=${APP_NAME:-"GUI_APPLICATION"}
 sed -i -e "s#GUI_APPLICATION#$APPNAME#" /etc/xrdp/xrdp.ini
 sed -i -e "s#GUI_APPLICATION#$APPNAME#" /etc/guacamole/noauth-config.xml
-if [[ -e /startapp.sh ]]; then 
+if [[ -e /startapp.sh ]]; then
 	chown nobody:users /startapp.sh
 	chmod +x /startapp.sh
 fi
@@ -237,7 +237,7 @@ cat <<'EOT' > /etc/service/tomcat7/run
 exec 2>&1
 touch /var/lib/tomcat7/logs/catalina.out
 cd /var/lib/tomcat7
-exec /usr/lib/jvm/java-8-oracle/jre/bin/java -Djava.util.logging.config.file=/var/lib/tomcat7/conf/logging.properties \
+exec /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java -Djava.util.logging.config.file=/var/lib/tomcat7/conf/logging.properties \
                                            -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager \
                                            -Djava.awt.headless=true -Xmx128m -XX:+UseConcMarkSweepGC \
                                            -Djava.endorsed.dirs=/usr/share/tomcat7/endorsed \
@@ -281,14 +281,14 @@ EOT
 cat <<'EOT' > /nobody/.config/openbox/autostart
 # Programs that will run after Openbox has started
 xsetroot -solid black -cursor_name left_ptr
-if [ -e /startapp.sh ]; then 
+if [ -e /startapp.sh ]; then
 	echo "Starting X app..."
  	exec /startapp.sh
 fi
 EOT
 
 
-chmod -R +x /etc/service/ /etc/my_init.d/ 
+chmod -R +x /etc/service/ /etc/my_init.d/
 
 #########################################
 ##             INSTALLATION            ##
@@ -314,7 +314,7 @@ ln -s /etc/guacamole/guacamole.properties /root/.guacamole/
 
 # Fix tomcat webroot
 rm -Rf /var/lib/tomcat7/webapps/ROOT
-ln -s /var/lib/tomcat7/webapps/guacamole.war /var/lib/tomcat7/webapps/ROOT.war 
+ln -s /var/lib/tomcat7/webapps/guacamole.war /var/lib/tomcat7/webapps/ROOT.war
 
 ### Compensate for GUAC-513
 mkdir -p /usr/lib/x86_64-linux-gnu/freerdp

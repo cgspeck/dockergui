@@ -1,19 +1,18 @@
-#Docker dockergui
+# Docker dockergui
 
 ## Description:
-dockergui is a base image based of phusion's base image version 0.9.16 with ssh disabled.
-  
- 
-This Docker image makes it possible to use any X application  on a headless server through a modern web browser such as chrome. The x11rdp branch using X11rdp to 
+dockergui is a base image based of phusion's base image version 0.9.19 with ssh disabled.
+
+This Docker image makes it possible to use any X application  on a headless server through a modern web browser such as chrome. The x11rdp branch using X11rdp to
 run its virtual X server, while the Xvnc using ofcourse Xvnc for it's virtual X server. The x11rdp branch is experimental and sometimes has drawing issues. Both branches
 use rdp for communication between the container and the client.
 Additionally xrdp is installed and the container can be accessed using any rdp client. You can access the web interface by going to port 8080 or rdp via port 3389.
-  
-  
+
+
 ## How to use this image:
-  
+
 ### Example docker file:
-  
+
 ```
 # Builds a docker gui image
 FROM hurricane/dockergui:xvnc
@@ -62,20 +61,19 @@ COPY startapp.sh /startapp.sh
 # Place whater volumes and ports you want exposed here:
 
 ```
-  
+
 ## Environment Variables
-  
+
 The dockergui image uses serveral optional enviromnet variable. All the ones listed in the example above plus the following:
 
-####`TZ`
-This environment variable is used to set the [TimeZone] of the container.
+`TZ` - This environment variable is used to set the [TimeZone] of the container.
 
 [TimeZone]: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-   
+
 ## Build from docker file (Info only, not required.):
 
 ```
-git clone --depth=1 https://github.com/hurricanehernandez/dockergui.git 
-cd tmm
-docker build --rm=true -t dockergui . 
+git clone --depth=1 https://github.com/cgspeck/dockergui.git
+cd dockergui
+docker build --rm=true -t dockergui .
 ```

@@ -1,6 +1,5 @@
 # dockergui
 FROM phusion/baseimage:0.9.19
-MAINTAINER 2devnull
 
 #########################################
 ##        ENVIRONMENTAL CONFIG         ##
@@ -13,7 +12,7 @@ ENV USER_ID=99
 ENV GROUP_ID=100
 
 # Gui App Name default is "GUI_APPLICATION"
-ENV APP_NAME="rdp-dev"
+ENV APP_NAME="GUI_APPLICATION"
 
 # Default resolution, change if you like
 ENV WIDTH=1280
