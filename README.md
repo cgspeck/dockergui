@@ -3,10 +3,11 @@
 ## Description:
 dockergui is a base image based of phusion's base image version 0.9.19 with ssh disabled.
 
-This Docker image makes it possible to use any X application  on a headless server through a modern web browser such as chrome. The x11rdp branch using X11rdp to
-run its virtual X server, while the Xvnc using ofcourse Xvnc for it's virtual X server. The x11rdp branch is experimental and sometimes has drawing issues. Both branches
-use rdp for communication between the container and the client.
-Additionally xrdp is installed and the container can be accessed using any rdp client. You can access the web interface by going to port 8080 or rdp via port 3389.
+This gives you a Ubuntu 16.04 LTS (Xenal) base.
+
+This Docker image makes it possible to use any X application on a headless server through a modern web browser such as chrome with X11rdp to run its virtual X server
+
+Xrdp is installed and the container can be accessed using any rdp client. You can access the web interface by going to port 8080 or rdp via port 3389.
 
 
 ## How to use this image:
@@ -40,8 +41,11 @@ CMD ["/sbin/my_init"]
 #########################################
 ##    REPOSITORIES AND DEPENDENCIES    ##
 #########################################
-echo 'deb http://archive.ubuntu.com/ubuntu trusty main universe restricted' > /etc/apt/sources.list
-echo 'deb http://archive.ubuntu.com/ubuntu trusty-updates main universe restricted' >> /etc/apt/sources.list
+RUN echo 'deb http://us.archive.ubuntu.com/ubuntu/ xenial main universe restricted' > /etc/apt/sources.list
+RUN echo 'deb http://us.archive.ubuntu.com/ubuntu/ xenial-updates main universe restricted' >> /etc/apt/sources.list
+RUN apt-get update
+
+# Install packages needed for app
 
 # Install packages needed for app
 
@@ -58,13 +62,13 @@ COPY startapp.sh /startapp.sh
 ##         EXPORTS AND VOLUMES         ##
 #########################################
 
-# Place whater volumes and ports you want exposed here:
+# Place whatever volumes and ports you want exposed here:
 
 ```
 
 ## Environment Variables
 
-The dockergui image uses serveral optional enviromnet variable. All the ones listed in the example above plus the following:
+The dockergui image uses several optional environment variables. All the ones listed in the example above plus the following:
 
 `TZ` - This environment variable is used to set the [TimeZone] of the container.
 
